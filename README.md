@@ -1,3 +1,5 @@
+                                                #nodebot messanger 
+
 https://expressbot1.herokuapp.com/
 https://expressbot1.herokuapp.com/webhooks/messenger
 this projek use bottender as base
@@ -48,6 +50,103 @@ First, please make sure that you have added Messenger as a product of your Faceb
 
 You can define your Verify Token in the filed of MESSENGER_VERIFY_TOKEN in .env. This token is for Facebook to confirm the origin of the response is from your bot server.
 ![alt text](https://user-images.githubusercontent.com/662387/71392880-cb613b00-2644-11ea-928f-7941a6d955d0.png)
+
+                            #Deploy to heroku
+                            
+##Heroku​
+
+Heroku is one of the most popular hosting services. Not only the clear document, ease of scalability, using Git for deployment, but also the friendly free pricing plan for experiment purpose.
+
+In the following, you can see the necessary steps of Heroku Deployment:
+###Step 1: Create a Heroku Account and Download Heroku CLI​
+
+First, sign up a Heroku account if you haven't, then download and install Heroku CLI.
+
+    Note: For the full command list, please refer to Heroku's doc, Heroku CLI Commands.
+
+###Step 2: Heroku Login and Create a Heroku App​
+
+Before going further, make sure you have login your Heroku account by:
+
+heroku login
+
+Then, you can create a Heroku app by the below command.
+
+heroku create <your-heroku-app-name>
+
+    Note: You may see some app name regulation if you don't meet it. For example: Name must start with a letter, end with a letter or digit and can only contain lowercase letters, digits, and dashes
+
+Once you created your Heroku app successfully, you could see a deployment address for your app like https://<your-heroku-app-name>.herokuapp.com/. You can note it down for the coming webhook setting.
+###Step 3: Fill in Environment Variables to Heroku​
+
+Config the environment variables of your Heroku app with the following commands: heroku config:set -a <your-heroku-app-name> <ENV_KEY_01>=<ENV_VALUE_01>.
+
+For chat channels require multiple environment variables, you may use commands like heroku config:set -a <your-heroku-app-name> <ENV_KEY_01>=<ENV_VALUE_01> <ENV_KEY_02>=<ENV_VALUE_02>.
+
+For example:
+
+heroku config:set -a <your-heroku-app-name> MESSENGER_PAGE_ID=xxxxxx MESSENGER_ACCESS_TOKEN=xxxxxx MESSENGER_APP_ID=xxxxxx MESSENGER_APP_SECRET=xxxxxx MESSENGER_VERIFY_TOKEN=xxxxxx
+
+###Step 4: Using Git in Your Bottender App​
+
+Deployment of Heroku depends on Git. Make sure you have run git init and make the first commit in your Bottender app.
+
+For example:
+
+git init
+git add .
+git commit -am "first commit"
+
+###Step 5: Deploy Your Bot to Heroku and Set Up Webhook​
+
+When you try to set up the webhook, some chat channels (e.g., Messenger) might ask for an immediate bot server verification. So, we recommend you to set up the webhook after your Bottender app server running.
+
+There are two basic types of webhook setup:
+
+    Set up webhook by Developer Console UI, e.g., Messenger, LINE, Slack
+    Set up webhook by CLI, e.g., Messenger, Telegram, Viber
+
+###Step 5a: Set Up Webhook by UI of Developer Console​
+
+Use Heroku CLI by Git push to complete the deployment.
+
+heroku git:remote -a <your-heroku-app-name>
+git push heroku master
+
+Then fill in your webhook URL on the developer console of the chat channel.
+
+    Note: If you are not familiar with webhook setup, you may refer to Bottender docs, Messenger Setup, LINE Setup, and Slack Setup.
+
+    Note: If you haven't changed your webhook path in bottender.config.js, by default, your Messenger Bot webhook is https://<your-heroku-app-name>.herokuapp.com/webhooks/messenger; your LINE Bot webhook is https://<your-heroku-app-name>.herokuapp.com/webhooks/line, etc.
+
+###Step 5b: Set Up Webhook by CLI​
+
+You can benefit from the Procfile feature of Heroku, which specifies the commands executed by the app on startup. We are going to use two process types of Procfile:
+
+    web process type: tell Heroku to run your bot server for every dyno
+    release process type: set up webhook before a new release is deployed to production
+
+    Note: For more information about Procfile, see The Procfile.
+
+Using a Messenger Bot as an example, the Procfile looks like the below with default webhook path settings:
+
+// Procfile
+
+web: npm start
+release: echo "Y" | npx bottender messenger webhook set -w https://<your-heroku-app-name>.com/webhooks/messenger
+
+    Note:
+
+        The echo "Y" aims to answer the first interactive CLI prompt
+        If you haven't changed your webhook path in bottender.config.js, by default, your Messenger Bot webhook is https://<your-heroku-app-name>.herokuapp.com/webhooks/messenger; your LINE Bot webhook is https://<your-heroku-app-name>.herokuapp.com/webhooks/line, etc.
+
+Finally, You can use Heroku CLI by Git push to complete the deployment and let Heroku runs the Procfile to help you finish the webhook setup.
+
+heroku git:remote -a <your-heroku-app-name>
+git push heroku master
+
+###Step 6: Completed!​          
+                  
 
 to deploy finish app can be seen in link:
 https://bottender.js.org/docs/advanced-guides-deployment
