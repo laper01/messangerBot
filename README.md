@@ -17,4 +17,5 @@ MESSENGER_VERIFY_TOKEN=
 Traverse to Your Facebook Apps → \${Your App Page} → Settings → Basic.
 
 You can see your App ID and App Secret. Facebook will ask your Facebook password again before display your App Secret. Fill these two values to MESSENGER_APP_ID and MESSENGER_APP_SECRET in .env.
-https://user-images.githubusercontent.com/662387/71390359-fe9ecc80-263a-11ea-9a3a-e7188992e471.png
+
+![alt text](https://user-images.githubusercontent.com/662387/71390359-fe9ecc80-263a-11ea-9a3a-e7188992e471.png)
