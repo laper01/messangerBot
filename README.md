@@ -21,7 +21,7 @@ delete sepesifisik meseges: htttp DELETE youromain/messages/messages_id
 
 how to config:
 1. fill in Environment Configuration
-# .env
+  # .env
 MESSENGER_PAGE_ID=
 MESSENGER_ACCESS_TOKEN=
 MESSENGER_APP_ID=
@@ -59,13 +59,14 @@ You can define your Verify Token in the filed of MESSENGER_VERIFY_TOKEN in .env.
 Heroku is one of the most popular hosting services. Not only the clear document, ease of scalability, using Git for deployment, but also the friendly free pricing plan for experiment purpose.
 
 In the following, you can see the necessary steps of Heroku Deployment:
-###Step 1: Create a Heroku Account and Download Heroku CLI​
+
+### Step 1: Create a Heroku Account and Download Heroku CLI​
 
 First, sign up a Heroku account if you haven't, then download and install Heroku CLI.
 
     Note: For the full command list, please refer to Heroku's doc, Heroku CLI Commands.
 
-###Step 2: Heroku Login and Create a Heroku App​
+### Step 2: Heroku Login and Create a Heroku App​
 
 Before going further, make sure you have login your Heroku account by:
 
@@ -78,7 +79,8 @@ heroku create <your-heroku-app-name>
     Note: You may see some app name regulation if you don't meet it. For example: Name must start with a letter, end with a letter or digit and can only contain lowercase letters, digits, and dashes
 
 Once you created your Heroku app successfully, you could see a deployment address for your app like https://<your-heroku-app-name>.herokuapp.com/. You can note it down for the coming webhook setting.
-###Step 3: Fill in Environment Variables to Heroku​
+    
+### Step 3: Fill in Environment Variables to Heroku
 
 Config the environment variables of your Heroku app with the following commands: heroku config:set -a <your-heroku-app-name> <ENV_KEY_01>=<ENV_VALUE_01>.
 
@@ -88,7 +90,7 @@ For example:
 
 heroku config:set -a <your-heroku-app-name> MESSENGER_PAGE_ID=xxxxxx MESSENGER_ACCESS_TOKEN=xxxxxx MESSENGER_APP_ID=xxxxxx MESSENGER_APP_SECRET=xxxxxx MESSENGER_VERIFY_TOKEN=xxxxxx
 
-###Step 4: Using Git in Your Bottender App​
+### Step 4: Using Git in Your Bottender App​
 
 Deployment of Heroku depends on Git. Make sure you have run git init and make the first commit in your Bottender app.
 
@@ -98,7 +100,7 @@ git init
 git add .
 git commit -am "first commit"
 
-###Step 5: Deploy Your Bot to Heroku and Set Up Webhook​
+### Step 5: Deploy Your Bot to Heroku and Set Up Webhook​
 
 When you try to set up the webhook, some chat channels (e.g., Messenger) might ask for an immediate bot server verification. So, we recommend you to set up the webhook after your Bottender app server running.
 
@@ -107,7 +109,7 @@ There are two basic types of webhook setup:
     Set up webhook by Developer Console UI, e.g., Messenger, LINE, Slack
     Set up webhook by CLI, e.g., Messenger, Telegram, Viber
 
-###Step 5a: Set Up Webhook by UI of Developer Console​
+### Step 5a: Set Up Webhook by UI of Developer Console​
 
 Use Heroku CLI by Git push to complete the deployment.
 
@@ -120,7 +122,7 @@ Then fill in your webhook URL on the developer console of the chat channel.
 
     Note: If you haven't changed your webhook path in bottender.config.js, by default, your Messenger Bot webhook is https://<your-heroku-app-name>.herokuapp.com/webhooks/messenger; your LINE Bot webhook is https://<your-heroku-app-name>.herokuapp.com/webhooks/line, etc.
 
-###Step 5b: Set Up Webhook by CLI​
+### Step 5b: Set Up Webhook by CLI​
 
 You can benefit from the Procfile feature of Heroku, which specifies the commands executed by the app on startup. We are going to use two process types of Procfile:
 
@@ -146,7 +148,8 @@ Finally, You can use Heroku CLI by Git push to complete the deployment and let H
 heroku git:remote -a <your-heroku-app-name>
 git push heroku master
 
-###Step 6: Completed!​          
+  
+### Step 6: Completed!​          
                   
 
 to deploy finish app can be seen in link:
