@@ -1,6 +1,8 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const { bottender } = require('bottender');
+const axios = require('axios');
+const Messages = require('./src/models/Messages').Messages;
 
 const app = bottender({
   dev: process.env.NODE_ENV !== 'production',
@@ -24,6 +26,29 @@ app.prepare().then(() => {
   server.get('/api', (req, res) => {
     res.json({ ok: true });
   });
+
+  server.get('/messages',(req,res, next)=>{
+    Messages.all((err,messages)=>{
+        if (err) return next(err);
+        res.send(messages);
+    })
+  })
+
+server.get('/messages/:id', (req, res, next)=>{
+    const {id} = req.params;
+    Messages.find(id, (err, messages)=>{
+        if (err) return next(err);
+        res.send(messages)
+    });
+});
+
+  server.delete('/messages/:id', (req, res, next)=>{
+    const {id} = req.params;
+    Messages.delete(id, (err)=>{
+        if(err) return next(err);
+        res.send({msg: "deleted"})
+    })
+})
 
   // route for webhook request
   server.all('*', (req, res) => {
