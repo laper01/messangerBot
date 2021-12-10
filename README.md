@@ -55,7 +55,7 @@ First, please make sure that you have added Messenger as a product of your Faceb
 You can define your Verify Token in the filed of MESSENGER_VERIFY_TOKEN in .env. This token is for Facebook to confirm the origin of the response is from your bot server.
 ![alt text](https://user-images.githubusercontent.com/662387/71392880-cb613b00-2644-11ea-928f-7941a6d955d0.png)
 
-                            #Deploy to heroku
+# Deploy to heroku
                             
 ##Heroku​
 
